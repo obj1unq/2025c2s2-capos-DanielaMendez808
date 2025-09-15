@@ -1,7 +1,7 @@
 object rolando{
     const historial = []
     var property hogar = castillo
-    var property mochila= #{espadaDelDestino}
+    const property mochila= #{}
     var property capacidad = 2
     method encuentraArtefacto(artefacto){
         historial.add(artefacto)
@@ -20,7 +20,7 @@ object rolando{
         mochila.clear()
     }
     method posesiones(){
-        return 
+        return mochila + castillo.artefactos()
     }
 }
 object castillo{

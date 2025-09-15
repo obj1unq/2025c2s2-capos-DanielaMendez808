@@ -8,4 +8,17 @@ import capos.*
         rolando.encuentraArtefacto(collarDivino)
         assert.notThat(rolando.tieneElArtefacto(collarDivino))
     }
+    test"Castillo de piedra"{
+        rolando.mochila.clear()
+        rolando.encuentraArtefacto(espadaDelDestino)
+        rolando.encuentraArtefacto(libroDeHechizos)
+        rolando.dejarArtefactosEnCastillo()
+        rolando.encuentraArtefacto(collarDivino)
+        rolando.dejarArtefactosEnCastillo()
+        assert.that(castillo.artefactos() == #{espadaDelDestino,libroDeHechizos,collarDivino})
+        assert.that(rolando.mochila == #{})    
+    }
+    test "saber que artefactos tiene rolando"{
+        castillo.artefactos(collarDivino,espadaDelDestino)
+    }
     }
