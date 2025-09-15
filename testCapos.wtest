@@ -1,0 +1,11 @@
+import capos.*
+    describe "capos"{
+    test "Rolando"{
+        rolando.encuentraArtefacto(espadaDelDestino)
+        rolando.tieneElArtefacto(espadaDelDestino)
+        rolando.encuentraArtefacto(libroDeHechizos)
+        rolando.tieneElArtefacto(libroDeHechizos)
+        rolando.encuentraArtefacto(collarDivino)
+        assert.notThat(rolando.tieneElArtefacto(collarDivino))
+    }
+    }
