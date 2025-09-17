@@ -32,4 +32,42 @@ import capos.*
         rolando.encuentraArtefacto(collarDivino)
         assert.equals([espadaDelDestino,libroDeHechizos,collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.historial())
     }
+    test "Comportamiento de los artefactos p 1"{
+        rolando.poderBase(5)
+        rolando.capacidad(3)
+        rolando.mochila(#{espadaDelDestino,armaduraDeAceroValyrio,collarDivino})
+        assert.equals(5, espadaDelDestino.poder(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poder(rolando))
+        assert.equals(3, collarDivino.poder(rolando))
+
+    }
+    test "Comportamiento de los artefactos p 2"{
+        rolando.poderBase(5)
+        rolando.capacidad(3)
+        rolando.mochila(#{espadaDelDestino,armaduraDeAceroValyrio,collarDivino})
+        rolando.batallar()
+        assert.equals(6, rolando.poderBase())
+        assert.equals(3, espadaDelDestino.poder(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poder(rolando))
+        assert.equals(3, collarDivino.poder(rolando))
+        rolando.batallar()
+        assert.equals(7, rolando.poderBase())
+        assert.equals(3.5, espadaDelDestino.poder(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poder(rolando))
+        assert.equals(5, collarDivino.poder(rolando))
+        rolando.batallar()
+        assert.equals(8, rolando.poderBase())
+        assert.equals(4, espadaDelDestino.poder(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poder(rolando))
+        assert.equals(6, collarDivino.poder(rolando))    
+    }
+    test "Ejemplo de poder de pelea"{
+        rolando.poderBase(5)
+        rolando.capacidad(3)
+        rolando.mochila(#{espadaDelDestino,armaduraDeAceroValyrio,collarDivino})
+        assert.equals(5, espadaDelDestino.poder(rolando))
+        assert.equals(6, armaduraDeAceroValyrio.poder(rolando))
+        assert.equals(3, collarDivino.poder(rolando))
+        assert.equals(19, rolando.poder())
+    }
     }
