@@ -41,7 +41,9 @@ object rolando{
 }
 object castillo{
     var property artefactos = #{}
-
+    method artefactoMasPoderoso(personaje){
+        return self.artefactos().max({artefacto => artefacto.poder(personaje)})
+    }
 }
 
 object espadaDelDestino {
@@ -59,9 +61,11 @@ object espadaDelDestino {
 }
 
 object libroDeHechizos {
+    var property hechizos = []
     method poder(personaje){
-
-    }
+        return hechizos.sum ({artefacto => artefacto.poder(self)})
+    } 
+    // cuando uso colleciones y les hago referencia no hace falta () al final
     method usado(){
         
     }
@@ -76,6 +80,12 @@ object bendicion{
 object invisibilidad{
     method poder(personaje){
         return personaje.poderBase()
+    }
+}
+
+object invocacion{
+    method poder(personaje){
+        return personaje.hogar().artefactoMasPoderoso(personaje)
     }
 }
 
