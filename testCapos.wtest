@@ -76,5 +76,12 @@ import capos.*
         castillo.artefactos(#{espadaDelDestino,armaduraDeAceroValyrio,collarDivino})
         libroDeHechizos.hechizos([bendicion,invisibilidad,invocacion])
         assert.equals(4,bendicion.poder(rolando))
+        rolando.batallar()
+        assert.equals(6,invisibilidad.poder(rolando))
+        rolando.batallar()
+        assert.equals(7,invocacion.poder(rolando))
+        rolando.batallar()
+        assert.equals([], libroDeHechizos.hechizos())
+        assert.equals(0, libroDeHechizos.poder(rolando))
     }
     }

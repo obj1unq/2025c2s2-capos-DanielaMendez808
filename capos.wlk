@@ -38,6 +38,8 @@ object rolando{
     method posesiones(){
         return mochila + castillo.artefactos()
     }
+    method poderArtefactoMasPoderoso(hogar)
+    //segir
 }
 object castillo{
     var property artefactos = #{}
@@ -85,7 +87,7 @@ object invisibilidad{
 
 object invocacion{
     method poder(personaje){
-        return personaje.hogar().artefactoMasPoderoso(personaje)
+        return personaje.poderArtefactoMasPoderosoDelHogar(personaje)
     }
 }
 
