@@ -19,6 +19,17 @@ import capos.*
         assert.that(rolando.mochila == #{})    
     }
     test "saber que artefactos tiene rolando"{
-        castillo.artefactos(collarDivino,espadaDelDestino)
+        castillo.artefactos(#{collarDivino,espadaDelDestino})
+        rolando.mochila(#{armaduraDeAceroValyrio})
+        assert.equals(#{collarDivino,espadaDelDestino,armaduraDeAceroValyrio}, rolando.posesiones())
+    }
+    test "Saber la historia de los encuentros con los artefactos"{
+        rolando.encuentraArtefacto(espadaDelDestino)
+        rolando.encuentraArtefacto(libroDeHechizos)
+        rolando.encuentraArtefacto(collarDivino)
+        rolando.dejarArtefactosEnCastillo()
+        rolando.encuentraArtefacto(armaduraDeAceroValyrio)
+        rolando.encuentraArtefacto(collarDivino)
+        assert.equals([espadaDelDestino,libroDeHechizos,collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.historial())
     }
     }

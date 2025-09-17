@@ -1,7 +1,7 @@
 object rolando{
-    const historial = []
+    const property historial = []
     var property hogar = castillo
-    const property mochila= #{}
+    var property mochila= #{}
     var property capacidad = 2
     method encuentraArtefacto(artefacto){
         historial.add(artefacto)
@@ -16,7 +16,7 @@ object rolando{
         return mochila.contains(artefacto) 
     }
     method dejarArtefactosEnCastillo(){
-        castillo.artefactos.union(mochila)
+        castillo.artefactos(castillo.artefactos().union(mochila)) // la union no guarda en ningun lado de por si?
         mochila.clear()
     }
     method posesiones(){
@@ -25,6 +25,7 @@ object rolando{
 }
 object castillo{
     var property artefactos = #{}
+
 }
 
 object espadaDelDestino {
