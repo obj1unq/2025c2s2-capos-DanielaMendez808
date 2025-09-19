@@ -1,5 +1,6 @@
 object rolando{
     const property historial = []
+    var property enemigos = #{caterina,archibaldo,astra}
     var property hogar = castillo
     var property mochila= #{}
     var property capacidad = 2
@@ -31,20 +32,66 @@ object rolando{
     method tieneElArtefacto(artefacto){
         return mochila.contains(artefacto) 
     }
-    method dejarArtefactosEnCastillo(){
-        castillo.artefactos(castillo.artefactos().union(mochila)) // la union no guarda en ningun lado de por si?
+    method dejarArtefactosEnHogar(){
+        hogar.artefactos(hogar.artefactos().union(mochila)) // la union no guarda en ningun lado de por si?
         mochila.clear()
     }
     method posesiones(){
-        return mochila + castillo.artefactos()
+        return mochila + hogar.artefactos()
     }
-    method poderArtefactoMasPoderoso(hogar)
-    //segir
+    method poderArtefactoMasPoderosoDelHogar(){
+        return hogar.artefactoMasPoderoso(self).poder(self)
+    }
+    method puedeVencerA(enemigo){
+        return self.poderBase() > enemigo.poder()
+    }
+    method moradaConquistable(enemigo){
+        return self.aQuienesPuedeVencer().map({enemigo => enemigo.hogar()})
+    }
+    method aQuienesPuedeVencer(){
+        return self.enemigos().filter({enemigo => self.puedeVencerA(enemigo)})
+    }
+    method esPoderoso(){
+        return self.aQuienesPuedeVencer().size() == self.enemigos().size()
+
+
+    }
 }
 object castillo{
     var property artefactos = #{}
     method artefactoMasPoderoso(personaje){
         return self.artefactos().max({artefacto => artefacto.poder(personaje)})
+    }
+}
+object caterina{
+    var property hogar = fortalezaDeAcero
+    method poder(){
+        return 28
+    }
+}
+
+object fortalezaDeAcero{
+
+}
+
+object palacioDeMarmol{
+
+}
+
+object torreDeMarfil{
+
+}
+object archibaldo{
+    var property hogar = palacioDeMarmol
+    method poder(){
+        return 16
+    }
+}
+
+object astra{
+    var property hogar = torreDeMarfil
+    method poder(){
+        return 14
     }
 }
 
@@ -65,11 +112,15 @@ object espadaDelDestino {
 object libroDeHechizos {
     var property hechizos = []
     method poder(personaje){
-        return hechizos.sum ({artefacto => artefacto.poder(self)})
+        if (self.hechizos().isEmpty()){
+            return 0
+        }else{
+           return self.hechizos().first().poder(personaje)
+        }
     } 
     // cuando uso colleciones y les hago referencia no hace falta () al final
     method usado(){
-        
+        self.hechizos( self.hechizos().drop(1) )
     }
 
 }
@@ -87,7 +138,7 @@ object invisibilidad{
 
 object invocacion{
     method poder(personaje){
-        return personaje.poderArtefactoMasPoderosoDelHogar(personaje)
+        return personaje.poderArtefactoMasPoderosoDelHogar()
     }
 }
 
