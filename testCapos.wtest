@@ -12,9 +12,9 @@ import capos.*
         rolando.mochila.clear()
         rolando.encuentraArtefacto(espadaDelDestino)
         rolando.encuentraArtefacto(libroDeHechizos)
-        rolando.dejarArtefactosEnCastillo()
+        rolando.dejarArtefactosEnHogar()
         rolando.encuentraArtefacto(collarDivino)
-        rolando.dejarArtefactosEnCastillo()
+        rolando.dejarArtefactosEnHogar()
         assert.that(castillo.artefactos() == #{espadaDelDestino,libroDeHechizos,collarDivino})
         assert.that(rolando.mochila == #{})    
     }
@@ -27,7 +27,7 @@ import capos.*
         rolando.encuentraArtefacto(espadaDelDestino)
         rolando.encuentraArtefacto(libroDeHechizos)
         rolando.encuentraArtefacto(collarDivino)
-        rolando.dejarArtefactosEnCastillo()
+        rolando.dejarArtefactosEnHogar()
         rolando.encuentraArtefacto(armaduraDeAceroValyrio)
         rolando.encuentraArtefacto(collarDivino)
         assert.equals([espadaDelDestino,libroDeHechizos,collarDivino,armaduraDeAceroValyrio,collarDivino], rolando.historial())
@@ -84,4 +84,20 @@ import capos.*
         assert.equals([], libroDeHechizos.hechizos())
         assert.equals(0, libroDeHechizos.poder(rolando))
     }
+
+    test "enemigos"{
+        rolando.poderBase(5)
+        rolando.capacidad(3)
+        rolando.mochila(#{espadaDelDestino,armaduraDeAceroValyrio,collarDivino})
+        assert.equals(19, rolando.poder())
+        assert.equals(#{archibaldo,astra}, rolando.aQuienesPuedeVencer())
+        assert.equals(#{palacioDeMarmol,torreDeMarfil},rolando.moradasConquistables() )
     }
+    test "Poderoso"{
+        rolando.poderBase(10)
+        rolando.capacidad(3)
+        rolando.mochila(#{espadaDelDestino,armaduraDeAceroValyrio,collarDivino})
+        assert.that(rolando.esPoderoso())
+    }
+    }
+    

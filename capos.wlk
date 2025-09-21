@@ -13,7 +13,7 @@ object rolando{
     }
     method batallar(){
         mochila.forEach({artefacto => artefacto.usado()})
-        poderBase = poderBase + 1
+        self.poderBase(self.poderBase() + 1)
         //for each de la mochila le uso el mensaje usado y le subo a rolando uno del poder base
         // siempre separar metodos que vuelven valores a los que realizen acciones
         // hago un metodo usado() en todos los artefactos aunque a algunos no les cambie nada, para mantener el polimorfismo: todos los artefactos entienden el mensaje usado()
@@ -43,10 +43,10 @@ object rolando{
         return hogar.artefactoMasPoderoso(self).poder(self)
     }
     method puedeVencerA(enemigo){
-        return self.poderBase() > enemigo.poder()
+        return self.poder() > enemigo.poder()
     }
-    method moradaConquistable(enemigo){
-        return self.aQuienesPuedeVencer().map({enemigo => enemigo.hogar()})
+    method moradasConquistables(){
+        return self.aQuienesPuedeVencer().map({enemigo => enemigo.hogar()}).asSet()
     }
     method aQuienesPuedeVencer(){
         return self.enemigos().filter({enemigo => self.puedeVencerA(enemigo)})
